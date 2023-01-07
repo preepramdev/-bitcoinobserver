@@ -1,7 +1,8 @@
-package com.pram.bitcoinobserver
+package com.pram.bitcoinobserver.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.pram.bitcoinobserver.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
