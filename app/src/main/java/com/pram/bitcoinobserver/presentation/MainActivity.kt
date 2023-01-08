@@ -1,25 +1,16 @@
 package com.pram.bitcoinobserver.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
-import com.pram.bitcoinobserver.R
-import com.pram.bitcoinobserver.domain.usecase.GetCurrentCoinPriceUseCase
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import androidx.appcompat.app.AppCompatActivity
+import com.pram.bitcoinobserver.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private val getCurrentCoinPriceUseCase: GetCurrentCoinPriceUseCase by inject()
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        lifecycleScope.launch {
-            getCurrentCoinPriceUseCase.execute()
-                .collect()
-        }
     }
 }
