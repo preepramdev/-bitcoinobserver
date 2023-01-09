@@ -1,4 +1,4 @@
-package com.pram.bitcoinobserver.presentation.history
+package com.pram.bitcoinobserver.presentation.feature.history
 
 import androidx.lifecycle.ViewModel
 

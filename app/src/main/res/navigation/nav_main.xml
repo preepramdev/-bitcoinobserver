@@ -7,21 +7,18 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.pram.bitcoinobserver.presentation.home.HomeFragment"
+        android:name="com.pram.bitcoinobserver.presentation.feature.home.HomeFragment"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_converterDialogFragment"
-            app:destination="@id/converterDialogFragment" />
         <action
             android:id="@+id/action_homeFragment_to_historyDialogFragment"
             app:destination="@id/historyDialogFragment" />
     </fragment>
     <dialog
-        android:id="@+id/converterDialogFragment"
-        android:name="com.pram.bitcoinobserver.presentation.converter.ConverterDialogFragment"
-        tools:layout="@layout/dialog_converter" />
-    <dialog
         android:id="@+id/historyDialogFragment"
-        android:name="com.pram.bitcoinobserver.presentation.history.HistoryDialogFragment"
+        android:name="com.pram.bitcoinobserver.presentation.feature.history.HistoryDialogFragment"
         tools:layout="@layout/dialog_history" />
+    <fragment
+        android:id="@+id/converterFragment"
+        android:name="com.pram.bitcoinobserver.presentation.feature.converter.ConverterFragment"
+        tools:layout="@layout/fragment_converter" />
 </navigation>

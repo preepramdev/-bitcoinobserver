@@ -1,6 +1,7 @@
 package com.pram.bitcoinobserver.domain.model
 
 data class CoinPriceModel(
+    val fetchTime: String,
     val time: Time? = null,
     val disclaimer: String? = null,
     val chartName: String? = null,

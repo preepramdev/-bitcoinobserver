@@ -13,4 +13,9 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+<!--    <style name="HomeCurrencyWidget">-->
+<!--        <item name="android:layout_marginHorizontal" tools:targetApi="o">16dp</item>-->
+<!--        <item name="android:layout_marginVertical" tools:targetApi="o">4dp</item>-->
+<!--    </style>-->
 </resources>

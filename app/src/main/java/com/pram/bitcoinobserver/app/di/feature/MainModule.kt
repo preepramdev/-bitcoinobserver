@@ -5,10 +5,10 @@ import com.pram.bitcoinobserver.data.repository.CoinPriceRepositoryImpl
 import com.pram.bitcoinobserver.data.source.remote.CoinDeskApi
 import com.pram.bitcoinobserver.domain.usecase.GetCurrentCoinPriceUseCase
 import com.pram.bitcoinobserver.domain.usecase.GetCurrentCoinPriceUseCaseImpl
-import com.pram.bitcoinobserver.presentation.MainViewModel
-import com.pram.bitcoinobserver.presentation.converter.ConverterViewModel
-import com.pram.bitcoinobserver.presentation.history.HistoryViewModel
-import com.pram.bitcoinobserver.presentation.home.HomeViewModel
+import com.pram.bitcoinobserver.presentation.feature.MainViewModel
+import com.pram.bitcoinobserver.presentation.feature.converter.ConverterViewModel
+import com.pram.bitcoinobserver.presentation.feature.history.HistoryViewModel
+import com.pram.bitcoinobserver.presentation.feature.home.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit

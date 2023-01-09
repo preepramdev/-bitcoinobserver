@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp"
+    app:cardBackgroundColor="@android:color/background_dark">
+
+    <LinearLayout
+        android:padding="24dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvCurrencyCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="currency"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvSymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="symbol"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="description"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rate"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

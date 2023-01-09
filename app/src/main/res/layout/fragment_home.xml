@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/sw"
+            android:id="@+id/sw_live"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Live"
@@ -23,7 +23,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_last_update"
+            android:text="last update "
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/sw_live"
+            app:layout_constraintTop_toTopOf="@id/sw_live"
+            app:layout_constraintBottom_toBottomOf="@id/sw_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="History"
@@ -42,59 +53,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_top">
 
-        <androidx.cardview.widget.CardView
-            android:layout_margin="16dp"
-            android:id="@+id/cardView2"
+        <com.pram.bitcoinobserver.presentation.widget.CurrencyWidget
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="4dp"
+            android:id="@+id/currencyWidgetUsd"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:cardBackgroundColor="@android:color/background_dark"
-            app:layout_constraintBottom_toTopOf="@+id/cardView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_weight="1">
+            app:layout_constraintBottom_toTopOf="@+id/currencyWidgetGbp"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="sdsfd"
-                android:textColor="@color/white" />
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_margin="16dp"
-            android:id="@+id/cardView"
+        <com.pram.bitcoinobserver.presentation.widget.CurrencyWidget
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="4dp"
+            android:id="@+id/currencyWidgetGbp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:cardBackgroundColor="@android:color/background_dark"
-            app:layout_constraintBottom_toTopOf="@+id/cardView3"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            app:layout_constraintVertical_weight="1">
+            app:layout_constraintBottom_toTopOf="@+id/currencyWidgetEur"
+            app:layout_constraintTop_toBottomOf="@+id/currencyWidgetUsd" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="sdsfd"
-                android:textColor="@color/white" />
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_margin="16dp"
-            android:id="@+id/cardView3"
+        <com.pram.bitcoinobserver.presentation.widget.CurrencyWidget
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="4dp"
+            android:id="@+id/currencyWidgetEur"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:cardBackgroundColor="@android:color/background_dark"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
-            app:layout_constraintVertical_weight="1">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="sdsfd"
-                android:textColor="@color/white" />
-
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toBottomOf="@+id/currencyWidgetGbp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

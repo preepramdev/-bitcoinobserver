@@ -1,4 +1,4 @@
-package com.pram.bitcoinobserver.presentation.converter
+package com.pram.bitcoinobserver.presentation.feature.converter
 
 import androidx.lifecycle.ViewModel
 
