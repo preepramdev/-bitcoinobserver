@@ -46,7 +46,6 @@ class CoinPriceRepositoryImpl (
     }.flowOn(Dispatchers.IO)
 
     override fun saveCoinPrice(coinPriceEntity: CoinPriceEntity): Flow<Unit> = flow {
-        Log.e("TAG", "saveCoinPrice: ", )
         runCatching {
             coinPriceDao.saveCoinPrice(coinPriceEntity)
         }.onSuccess {

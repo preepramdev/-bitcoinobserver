@@ -46,7 +46,6 @@ class MainViewModel(
                 exception.printStackTrace()
             }
             .flatMapConcat { coinPriceModel ->
-                Log.e("TAG", "getCurrentCoinPrice: ", )
                 saveCoinPriceToHistoryUseCase.execute(coinPriceModel).map { coinPriceModel }
             }.collect { coinPriceModel ->
                 showCoinPrice(coinPriceModel)
