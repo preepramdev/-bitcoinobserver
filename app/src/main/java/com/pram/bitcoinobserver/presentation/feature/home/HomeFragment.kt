@@ -5,24 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.pram.bitcoinobserver.R
 import com.pram.bitcoinobserver.databinding.FragmentHomeBinding
 import com.pram.bitcoinobserver.domain.model.CoinPriceModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
+import com.pram.bitcoinobserver.presentation.feature.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
-    companion object {
-//        private const val DELAY_UPDATE_TIME = 1000L * 60
-        private const val DELAY_UPDATE_TIME = 2000L
-    }
-
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     private val viewModel by viewModel<HomeViewModel>()
+    private val mainViewModel by activityViewModel<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,48 +28,26 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initView()
         observeViewModel()
-        viewModel.refreshCoinPrice()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        lifecycleScope.launchWhenResumed {
-            while (isActive) {
-                delay(DELAY_UPDATE_TIME)
-                viewModel.refreshCoinPrice()
-            }
-        }
-    }
-
-
-    private fun initView() = with(binding) {
-        swLive.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setIsLiveNeeded(isChecked)
-        }
-
-        btnHistory.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_historyDialogFragment)
-        }
+        observeMainViewModel()
     }
 
     private fun observeViewModel() = with(viewModel) {
-        isLive.observe(viewLifecycleOwner) { _isLive ->
-            binding.swLive.isChecked = _isLive
-        }
-
-        coinPrice.observe(viewLifecycleOwner) { _coinPrice ->
-            showCoinPrice(_coinPrice)
+        showCurrencies.observe(viewLifecycleOwner) { currenciesBpi ->
+            showCoinPrice(currenciesBpi)
         }
     }
 
-    private fun showCoinPrice(coinPrice: CoinPriceModel) = with(binding) {
-        val usd = coinPrice.bpi?.usd
-        val gbp = coinPrice.bpi?.gbp
-        val eur = coinPrice.bpi?.eur
+    private fun observeMainViewModel() = with(mainViewModel) {
+        coinPrice.observe(viewLifecycleOwner) { _coinPrice ->
+            viewModel.setCoinPrice(_coinPrice)
+        }
+    }
 
-        tvLastUpdate.text = coinPrice.fetchTime
+    private fun showCoinPrice(currenciesBpi: CoinPriceModel.Bpi) = with(binding) {
+        val usd = currenciesBpi.usd
+        val gbp =currenciesBpi.gbp
+        val eur = currenciesBpi.eur
 
         currencyWidgetUsd.apply {
             setCurrencyCode(usd?.code.orEmpty())

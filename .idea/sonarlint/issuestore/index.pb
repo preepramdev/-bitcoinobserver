@@ -8,12 +8,8 @@ Xapp/src/main/java/com/pram/bitcoinobserver/domain/usecase/GetHistoryCoinPricesU
 è
 _app/src/main/java/com/pram/bitcoinobserver/presentation/feature/converter/ConverterViewModel.kt,4/3/43cee8ebb2d877e5464ee210e0de40cbe3c8d98b
 Ä
-Papp/src/main/java/com/pram/bitcoinobserver/presentation/feature/MainViewModel.kt,e/0/e01eb25688126304142a3714a2fc39dba8be7929
-Ä
 Papp/src/main/java/com/pram/bitcoinobserver/presentation/widget/CurrencyWidget.kt,4/c/4c0048565a09baa2114802c133f5023e2bd73500
 ã
 [app/src/main/java/com/pram/bitcoinobserver/presentation/feature/history/HistoryViewModel.kt,3/2/32692e8f21904f7e99d607fac307cc9b9d35ca8c
-ê
-`app/src/main/java/com/pram/bitcoinobserver/presentation/feature/history/HistoryDialogFragment.kt,a/f/affd96ddaeb341096bb316e37fc3fcc8ddad5d79
 é
 ^app/src/main/java/com/pram/bitcoinobserver/presentation/feature/converter/ConverterFragment.kt,b/b/bbb2bc16b3fb003f4cd1e53b0318b7a2ad64e617

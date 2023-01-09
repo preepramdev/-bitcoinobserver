@@ -6,77 +6,37 @@
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_top"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/sw_live"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Live"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_last_update"
-            android:text="last update "
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/sw_live"
-            app:layout_constraintTop_toTopOf="@id/sw_live"
-            app:layout_constraintBottom_toBottomOf="@id/sw_live"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_history"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="History"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_top">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.pram.bitcoinobserver.presentation.widget.CurrencyWidget
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="4dp"
             android:id="@+id/currencyWidgetUsd"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="4dp"
             app:layout_constraintBottom_toTopOf="@+id/currencyWidgetGbp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.pram.bitcoinobserver.presentation.widget.CurrencyWidget
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="4dp"
             android:id="@+id/currencyWidgetGbp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="4dp"
             app:layout_constraintBottom_toTopOf="@+id/currencyWidgetEur"
             app:layout_constraintTop_toBottomOf="@+id/currencyWidgetUsd" />
 
         <com.pram.bitcoinobserver.presentation.widget.CurrencyWidget
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="4dp"
             android:id="@+id/currencyWidgetEur"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/currencyWidgetGbp" />
 

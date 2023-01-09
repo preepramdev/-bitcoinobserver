@@ -34,13 +34,13 @@ val mainModule = module {
     }
 
     viewModel {
-        MainViewModel()
+        MainViewModel(
+            getCurrentCoinPriceUseCase = get()
+        )
     }
 
     viewModel {
-        HomeViewModel(
-            getCurrentCoinPriceUseCase = get()
-        )
+        HomeViewModel()
     }
 
     viewModel {

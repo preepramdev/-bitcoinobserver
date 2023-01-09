@@ -5,13 +5,14 @@
     android:id="@+id/nav_main"
     app:startDestination="@id/homeFragment">
 
+    <action
+        android:id="@+id/action_mainActivity_to_historyDialogFragment"
+        app:destination="@id/historyDialogFragment" />
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.pram.bitcoinobserver.presentation.feature.home.HomeFragment"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_historyDialogFragment"
-            app:destination="@id/historyDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/historyDialogFragment"
