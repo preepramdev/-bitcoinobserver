@@ -27,7 +27,8 @@ class CoinPriceHistoryItemAdapter(
     }
 
     override fun onBindViewHolder(holder: CoinPriceHistoryItemViewHolder, position: Int) {
-
+        val history = historyList[position]
+        holder.setup(history)
     }
 
     override fun getItemCount(): Int = historyList.size
@@ -36,5 +37,8 @@ class CoinPriceHistoryItemAdapter(
         private val binding: ItemCoinPriceHistoryBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
+        fun setup(history: String) {
+            binding.tvFetchTime.text = history
+        }
     }
 }

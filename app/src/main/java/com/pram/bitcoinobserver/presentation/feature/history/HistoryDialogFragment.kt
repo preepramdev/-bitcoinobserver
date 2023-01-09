@@ -16,7 +16,7 @@ class HistoryDialogFragment : DialogFragment() {
     private val viewModel by viewModel<HistoryViewModel>()
 
     private val coinPriceHistoryItemAdapter = CoinPriceHistoryItemAdapter(
-        mutableListOf("sfsf", "dfsfsfsffd")
+//        mutableListOf("sfsf", "dfsfsfsffd")
     )
 
     override fun onCreateView(
@@ -32,6 +32,7 @@ class HistoryDialogFragment : DialogFragment() {
 
         initView()
         observeViewModel()
+        viewModel.getHistoryCoinPrices()
     }
 
     private fun initView() = with(binding) {
@@ -43,6 +44,8 @@ class HistoryDialogFragment : DialogFragment() {
     }
 
     private fun observeViewModel() = with(viewModel) {
-
+        showHistories.observe(viewLifecycleOwner) { histories ->
+            coinPriceHistoryItemAdapter.setHistoryList(histories)
+        }
     }
 }
