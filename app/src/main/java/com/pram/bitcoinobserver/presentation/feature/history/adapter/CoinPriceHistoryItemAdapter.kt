@@ -10,6 +10,8 @@ class CoinPriceHistoryItemAdapter(
     private val historyList: MutableList<CoinPriceModel> = mutableListOf()
 ) : RecyclerView.Adapter<CoinPriceHistoryItemAdapter.CoinPriceHistoryItemViewHolder>() {
 
+    var onItemClicked: ((CoinPriceModel) -> Unit?)? = null
+
     fun setHistoryList(historyList: List<CoinPriceModel>) {
         this.historyList.apply {
             clear()
@@ -38,8 +40,11 @@ class CoinPriceHistoryItemAdapter(
         private val binding: ItemCoinPriceHistoryBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
-        fun setup(history: CoinPriceModel) {
-            binding.tvFetchTime.text = history.fetchTime
+        fun setup(coinPrice: CoinPriceModel) = with(binding) {
+            tvFetchTime.text = coinPrice.fetchTime
+            root.setOnClickListener {
+                onItemClicked?.let { it(coinPrice) }
+            }
         }
     }
 }
