@@ -17,8 +17,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        //        private const val DELAY_UPDATE_TIME = 1000L * 60
-        private const val DELAY_UPDATE_TIME = 2000L
+                private const val DELAY_UPDATE_TIME = 1000L * 60
+//        private const val DELAY_UPDATE_TIME = 2000L
         const val KET_SELECT_FROM_HISTORY = "KET_SELECT_FROM_HISTORY"
     }
 
