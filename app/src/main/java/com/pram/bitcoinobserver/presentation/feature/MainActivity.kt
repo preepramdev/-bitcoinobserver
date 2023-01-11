@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.pram.bitcoinobserver.R
 import com.pram.bitcoinobserver.databinding.ActivityMainBinding
+import com.pram.bitcoinobserver.domain.model.CoinPriceModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         //        private const val DELAY_UPDATE_TIME = 1000L * 60
         private const val DELAY_UPDATE_TIME = 2000L
+        const val KET_SELECT_FROM_HISTORY = "KET_SELECT_FROM_HISTORY"
     }
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         initView()
         observeViewModel()
+        observeNavControllerResult()
         viewModel.refreshCoinPrice()
     }
 
@@ -65,6 +68,15 @@ class MainActivity : AppCompatActivity() {
 
         coinPrice.observe(this@MainActivity) { _coinPrice ->
             binding.tvLastUpdate.text = _coinPrice.fetchTime
+        }
+    }
+
+    private fun observeNavControllerResult() {
+        navController.currentBackStackEntry?.savedStateHandle?.apply {
+            getLiveData<CoinPriceModel>(KET_SELECT_FROM_HISTORY)
+                .observe(this@MainActivity) { selectedCoinPrice ->
+                viewModel.setCoinPriceFromHistory(selectedCoinPrice)
+            }
         }
     }
 }

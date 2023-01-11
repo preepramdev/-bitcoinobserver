@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pram.bitcoinobserver.databinding.ItemCoinPriceHistoryBinding
+import com.pram.bitcoinobserver.domain.model.CoinPriceModel
 
 class CoinPriceHistoryItemAdapter(
-    private val historyList: MutableList<String> = mutableListOf()
+    private val historyList: MutableList<CoinPriceModel> = mutableListOf()
 ) : RecyclerView.Adapter<CoinPriceHistoryItemAdapter.CoinPriceHistoryItemViewHolder>() {
 
-    fun setHistoryList(historyList: List<String>) {
+    fun setHistoryList(historyList: List<CoinPriceModel>) {
         this.historyList.apply {
             clear()
             addAll(historyList)
@@ -37,8 +38,8 @@ class CoinPriceHistoryItemAdapter(
         private val binding: ItemCoinPriceHistoryBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
-        fun setup(history: String) {
-            binding.tvFetchTime.text = history
+        fun setup(history: CoinPriceModel) {
+            binding.tvFetchTime.text = history.fetchTime
         }
     }
 }

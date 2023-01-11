@@ -48,13 +48,15 @@ val mainModule = module {
 
     factory<SaveCoinPriceToHistoryUseCase> {
         SaveCoinPriceToHistoryUseCaseImpl(
-            coinPriceRepository = get()
+            coinPriceRepository = get(),
+            gson = get()
         )
     }
 
     factory<GetHistoryCoinPricesUseCase> {
         GetHistoryCoinPricesUseCaseImpl(
-            coinPriceRepository = get()
+            coinPriceRepository = get(),
+            gson = get()
         )
     }
 
