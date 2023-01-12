@@ -49,25 +49,8 @@ class HomeFragment : Fragment() {
         val gbp =currenciesBpi.gbp
         val eur = currenciesBpi.eur
 
-        currencyWidgetUsd.apply {
-            setCurrencyCode(usd?.code.orEmpty())
-            setSymbol(usd?.symbol.orEmpty())
-            setDescription(usd?.description.orEmpty())
-            setRate(usd?.rate.orEmpty())
-        }
-
-        currencyWidgetGbp.apply {
-            setCurrencyCode(gbp?.code.orEmpty())
-            setSymbol(gbp?.symbol.orEmpty())
-            setDescription(gbp?.description.orEmpty())
-            setRate(gbp?.rate.orEmpty())
-        }
-
-        currencyWidgetEur.apply {
-            setCurrencyCode(eur?.code.orEmpty())
-            setSymbol(eur?.symbol.orEmpty())
-            setDescription(eur?.description.orEmpty())
-            setRate(eur?.rate.orEmpty())
-        }
+        usd?.let { currencyWidgetUsd.setCurrency(it) }
+        gbp?.let { currencyWidgetGbp.setCurrency(it) }
+        eur?.let { currencyWidgetEur.setCurrency(it) }
     }
 }

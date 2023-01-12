@@ -45,16 +45,19 @@ class GetCurrentCoinPriceUseCaseImpl(
                 usd = CoinPriceModel.Bpi.Currency(
                     code = bpi?.usd?.code,
                     symbol = bpi?.usd?.symbol,
+                    description = bpi?.usd?.description,
                     rate = bpi?.usd?.rate,
                 ),
                 gbp = CoinPriceModel.Bpi.Currency(
                     code = bpi?.gbp?.code,
                     symbol = bpi?.gbp?.symbol,
+                    description = bpi?.gbp?.description,
                     rate = bpi?.gbp?.rate,
                 ),
                 eur = CoinPriceModel.Bpi.Currency(
                     code = bpi?.eur?.code,
                     symbol = bpi?.eur?.symbol,
+                    description = bpi?.eur?.description,
                     rate = bpi?.eur?.rate,
                 ),
             )
