@@ -92,7 +92,15 @@ class ConverterFragment : Fragment() {
         findNavController().currentBackStackEntry?.savedStateHandle?.apply {
             getLiveData<CurrencyCodeEnum>(KEY_SELECT_CURRENCY)
                 .observe(viewLifecycleOwner) { currencyCode ->
-                    viewModel.selectedCurrencyCode(currencyCode)
+                    binding.apply {
+                        viewModel.selectedCurrencyCode(currencyCode)
+                        if (edtBtcAmount.hasFocus()) {
+                            viewModel.setCoinAmount(edtBtcAmount.text.toString())
+                        }
+                        if (edtCurrencyAmount.hasFocus()) {
+                            viewModel.setCurrencyAmount(edtCurrencyAmount.text.toString())
+                        }
+                    }
                 }
         }
     }

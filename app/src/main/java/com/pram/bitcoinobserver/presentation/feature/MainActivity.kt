@@ -67,7 +67,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         coinPrice.observe(this@MainActivity) { _coinPrice ->
-            binding.tvLastUpdate.text = _coinPrice.fetchTime
+            binding.apply {
+                tvLastFetch.text = "fetch time ${_coinPrice.fetchTime}"
+                tvLastUpdate.text = "last update ${_coinPrice.time?.updated.orEmpty()}"
+                tvDisclaimer.text = _coinPrice.disclaimer.orEmpty()
+            }
         }
     }
 

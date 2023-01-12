@@ -5,10 +5,13 @@
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
     app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/darker_gray"
     app:cardUseCompatPadding="true"
     app:contentPadding="16dp">
 
     <TextView
+        android:textColor="@color/purple_700"
+        android:textStyle="bold"
         android:id="@+id/tv_currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

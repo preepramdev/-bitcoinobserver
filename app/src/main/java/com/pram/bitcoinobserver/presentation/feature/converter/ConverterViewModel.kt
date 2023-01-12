@@ -36,7 +36,6 @@ class ConverterViewModel(
     fun selectedCurrencyCode(currencyCodeEnum: CurrencyCodeEnum) {
         convertAmountModel.currencyCode = currencyCodeEnum
         calculateSelectedCurrencyPriceIn1Btc()
-        calculateCurrencyAmount()
         _showSelectedCurrency.value = convertAmountModel.currencyCode
     }
 
