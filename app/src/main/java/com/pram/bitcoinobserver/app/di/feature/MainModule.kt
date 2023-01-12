@@ -8,6 +8,7 @@ import com.pram.bitcoinobserver.data.source.remote.CoinDeskApi
 import com.pram.bitcoinobserver.domain.usecase.*
 import com.pram.bitcoinobserver.presentation.feature.MainViewModel
 import com.pram.bitcoinobserver.presentation.feature.converter.ConverterViewModel
+import com.pram.bitcoinobserver.presentation.feature.converter.selectcurrency.SelectCurrencyViewModel
 import com.pram.bitcoinobserver.presentation.feature.history.HistoryViewModel
 import com.pram.bitcoinobserver.presentation.feature.home.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -63,6 +64,10 @@ val mainModule = module {
         ConvertCurrencyToCoinUseCaseImpl()
     }
 
+    factory<GetCurrencyCodesUseCase> {
+        GetCurrencyCodesUseCaseImpl()
+    }
+
     viewModel {
         MainViewModel(
             getCurrentCoinPriceUseCase = get(),
@@ -84,6 +89,12 @@ val mainModule = module {
     viewModel {
         HistoryViewModel(
             getHistoryCoinPricesUseCase = get()
+        )
+    }
+
+    viewModel {
+        SelectCurrencyViewModel(
+            getCurrencyCodesUseCase = get()
         )
     }
 }

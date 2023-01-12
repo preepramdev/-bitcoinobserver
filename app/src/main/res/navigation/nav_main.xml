@@ -12,8 +12,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.pram.bitcoinobserver.presentation.feature.home.HomeFragment"
-        tools:layout="@layout/fragment_home" >
-    </fragment>
+        tools:layout="@layout/fragment_home"/>
     <dialog
         android:id="@+id/historyDialogFragment"
         android:name="com.pram.bitcoinobserver.presentation.feature.history.HistoryDialogFragment"
@@ -21,5 +20,13 @@
     <fragment
         android:id="@+id/converterFragment"
         android:name="com.pram.bitcoinobserver.presentation.feature.converter.ConverterFragment"
-        tools:layout="@layout/fragment_converter" />
+        tools:layout="@layout/fragment_converter">
+        <action
+            android:id="@+id/action_converterFragment_to_selectCurrencyDialogFragment"
+            app:destination="@id/selectCurrencyDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/selectCurrencyDialogFragment"
+        android:name="com.pram.bitcoinobserver.presentation.feature.converter.selectcurrency.SelectCurrencyDialogFragment"
+        tools:layout="@layout/dialog_select_currency" />
 </navigation>

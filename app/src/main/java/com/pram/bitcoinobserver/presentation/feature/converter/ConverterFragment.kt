@@ -1,18 +1,26 @@
 package com.pram.bitcoinobserver.presentation.feature.converter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.pram.bitcoinobserver.R
 import com.pram.bitcoinobserver.databinding.FragmentConverterBinding
+import com.pram.bitcoinobserver.domain.enumModel.CurrencyCodeEnum
 import com.pram.bitcoinobserver.presentation.feature.MainViewModel
 import com.pram.bitcoinobserver.presentation.feature.converter.extension.toStringIn10Decimal
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ConverterFragment : Fragment() {
+
+    companion object {
+        const val KEY_SELECT_CURRENCY = "KEY_SELECT_CURRENCY"
+    }
 
     private val binding by lazy { FragmentConverterBinding.inflate(layoutInflater) }
     private val viewModel by viewModel<ConverterViewModel>()
@@ -32,6 +40,7 @@ class ConverterFragment : Fragment() {
         initView()
         observeViewModel()
         observeMainViewModel()
+        observeNavControllerResult()
     }
 
     private fun initView() = with(binding) {
@@ -45,6 +54,10 @@ class ConverterFragment : Fragment() {
             if (edtCurrencyAmount.hasFocus()) {
                 viewModel.setCurrencyAmount(text.toString(), "usd")
             }
+        }
+
+        tvCurrency.setOnClickListener {
+            findNavController().navigate(R.id.action_converterFragment_to_selectCurrencyDialogFragment)
         }
     }
 
@@ -68,6 +81,16 @@ class ConverterFragment : Fragment() {
                     viewModel.setCurrencyAmount(edtCurrencyAmount.text.toString(), "usd")
                 }
             }
+        }
+    }
+
+    private fun observeNavControllerResult() {
+        findNavController().currentBackStackEntry?.savedStateHandle?.apply {
+            getLiveData<CurrencyCodeEnum>(KEY_SELECT_CURRENCY)
+                .observe(viewLifecycleOwner) { currencyCode ->
+                    Log.e("TAG", "observeNavControllerResult: ", )
+                    Log.e("TAG", "observeNavControllerResult currencyCode: $currencyCode", )
+                }
         }
     }
 }
