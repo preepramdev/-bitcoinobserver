@@ -68,6 +68,10 @@ val mainModule = module {
         GetCurrencyCodesUseCaseImpl()
     }
 
+    factory<GetSelectedCurrencyPriceIn1BtcUseCase> {
+        GetSelectedCurrencyPriceIn1BtcUseCaseImpl()
+    }
+
     viewModel {
         MainViewModel(
             getCurrentCoinPriceUseCase = get(),
@@ -82,7 +86,8 @@ val mainModule = module {
     viewModel {
         ConverterViewModel(
             convertCoinToCurrencyUseCase = get(),
-            convertCurrencyToCoinUseCase = get()
+            convertCurrencyToCoinUseCase = get(),
+            getSelectedCurrencyPriceIn1BtcUseCase = get()
         )
     }
 

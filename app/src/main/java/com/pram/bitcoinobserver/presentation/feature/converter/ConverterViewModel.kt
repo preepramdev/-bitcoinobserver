@@ -1,18 +1,19 @@
 package com.pram.bitcoinobserver.presentation.feature.converter
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pram.bitcoinobserver.domain.enumModel.CurrencyCodeEnum
-import com.pram.bitcoinobserver.domain.model.AmountModel
 import com.pram.bitcoinobserver.domain.model.CoinPriceModel
+import com.pram.bitcoinobserver.domain.model.ConvertAmountModel
 import com.pram.bitcoinobserver.domain.usecase.ConvertCoinToCurrencyUseCase
 import com.pram.bitcoinobserver.domain.usecase.ConvertCurrencyToCoinUseCase
+import com.pram.bitcoinobserver.domain.usecase.GetSelectedCurrencyPriceIn1BtcUseCase
 
 class ConverterViewModel(
     private val convertCoinToCurrencyUseCase: ConvertCoinToCurrencyUseCase,
-    private val convertCurrencyToCoinUseCase: ConvertCurrencyToCoinUseCase
+    private val convertCurrencyToCoinUseCase: ConvertCurrencyToCoinUseCase,
+    private val getSelectedCurrencyPriceIn1BtcUseCase: GetSelectedCurrencyPriceIn1BtcUseCase
 ) : ViewModel() {
 
     companion object {
@@ -20,69 +21,74 @@ class ConverterViewModel(
         private const val DEFAULT_COIN_PRICE_IN_SELECTED_CURRENCY = 0.0
     }
 
-    var amountModel = AmountModel()
-
-    var coinPriceInSelectedCurrency: Double = 0.0
+    private var convertAmountModel = ConvertAmountModel()
+    private var coinPrice: CoinPriceModel? = null
+    private var selectedCurrencyIn1Btc: Double = 0.0
 
     private val _showCoinAmountResult = MutableLiveData<Double>()
     private val _showCurrencyAmountResult = MutableLiveData<Double>()
+    private val _showSelectedCurrency = MutableLiveData<CurrencyCodeEnum>()
 
     val showCoinAmountResult: LiveData<Double> = _showCoinAmountResult
     val showCurrencyAmountResult: LiveData<Double> = _showCurrencyAmountResult
+    val showSelectedCurrency: LiveData<CurrencyCodeEnum> = _showSelectedCurrency
 
-    fun setCoinPrice(coinPrice: CoinPriceModel) {
-        kotlin.runCatching {
-            val rate = coinPrice.bpi?.usd?.rate ?: "" // select with currencyCode
-            rate.replace(",", "").toDoubleOrNull() ?: DEFAULT_COIN_PRICE_IN_SELECTED_CURRENCY
-        }.onSuccess { _coinPriceInSelectedCurrency ->
-            coinPriceInSelectedCurrency = _coinPriceInSelectedCurrency
-        }.onFailure { exception ->
-            exception.printStackTrace()
-        }
-        Log.e("TAG", "setCoinAmount: $coinPriceInSelectedCurrency")
+    fun selectedCurrencyCode(currencyCodeEnum: CurrencyCodeEnum) {
+        convertAmountModel.currencyCode = currencyCodeEnum
+        calculateSelectedCurrencyPriceIn1Btc()
+        calculateCurrencyAmount()
+        _showSelectedCurrency.value = convertAmountModel.currencyCode
+    }
+
+    fun updateCoinPrice(coinPrice: CoinPriceModel) {
+        this.coinPrice = coinPrice
+        calculateSelectedCurrencyPriceIn1Btc()
     }
 
     fun setCoinAmount(coinInput: String) {
         runCatching {
             coinInput.toDoubleOrNull() ?: DEFAULT_INPUT_AMOUNT
         }.onSuccess { coinAmount ->
-            amountModel.coinInputAmount = coinAmount
+            convertAmountModel.coinInputAmount = coinAmount
             calculateCurrencyAmount()
         }.onFailure { exception ->
             exception.printStackTrace()
         }
-        Log.e("TAG", "setCoinAmount: $amountModel")
     }
 
-    fun setCurrencyAmount(currencyInput: String, currencyCode: String) {
+    fun setCurrencyAmount(currencyInput: String) {
         runCatching {
-            val currencyAmount = currencyInput.toDoubleOrNull() ?: DEFAULT_INPUT_AMOUNT
-//            val currencyCodeEnum = CurrencyCodeEnum.valueOf(currencyCode)
-            Pair(currencyAmount, CurrencyCodeEnum.USD)
-        }.onSuccess { pairCurrency ->
-            amountModel.currencyInputAmount = pairCurrency.first
-            amountModel.currencyCode = pairCurrency.second
+            currencyInput.toDoubleOrNull() ?: DEFAULT_INPUT_AMOUNT
+        }.onSuccess { currencyAmount ->
+            convertAmountModel.currencyInputAmount = currencyAmount
             calculateCoinAmount()
         }.onFailure { exception ->
             exception.printStackTrace()
         }
     }
 
+    private fun calculateSelectedCurrencyPriceIn1Btc() {
+        selectedCurrencyIn1Btc = getSelectedCurrencyPriceIn1BtcUseCase.execute(
+            convertAmountModel.currencyCode,
+            coinPrice
+        ) ?: DEFAULT_COIN_PRICE_IN_SELECTED_CURRENCY
+    }
+
     private fun calculateCoinAmount() {
         val calculateCoinResult = convertCurrencyToCoinUseCase.execute(
-            amountModel.currencyInputAmount,
-            coinPriceInSelectedCurrency
+            convertAmountModel.currencyInputAmount,
+            selectedCurrencyIn1Btc
         )
-        amountModel.coinInputAmount = calculateCoinResult
+        convertAmountModel.coinInputAmount = calculateCoinResult
         _showCoinAmountResult.value = calculateCoinResult
     }
 
     private fun calculateCurrencyAmount() {
         val calculateCurrencyResult = convertCoinToCurrencyUseCase.execute(
-            amountModel.coinInputAmount,
-            coinPriceInSelectedCurrency
+            convertAmountModel.coinInputAmount,
+            selectedCurrencyIn1Btc
         )
-        amountModel.currencyInputAmount = calculateCurrencyResult
+        convertAmountModel.currencyInputAmount = calculateCurrencyResult
         _showCurrencyAmountResult.value = calculateCurrencyResult
     }
 }

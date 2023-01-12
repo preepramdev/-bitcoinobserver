@@ -1,7 +1,6 @@
 package com.pram.bitcoinobserver.presentation.feature.converter
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +51,7 @@ class ConverterFragment : Fragment() {
 
         edtCurrencyAmount.doAfterTextChanged { text ->
             if (edtCurrencyAmount.hasFocus()) {
-                viewModel.setCurrencyAmount(text.toString(), "usd")
+                viewModel.setCurrencyAmount(text.toString())
             }
         }
 
@@ -65,20 +64,25 @@ class ConverterFragment : Fragment() {
         showCoinAmountResult.observe(viewLifecycleOwner) { coinAmount ->
             binding.edtBtcAmount.setText(coinAmount.toStringIn10Decimal())
         }
+
         showCurrencyAmountResult.observe(viewLifecycleOwner) { currencyAmount ->
             binding.edtCurrencyAmount.setText(currencyAmount.toStringIn10Decimal())
+        }
+
+        showSelectedCurrency.observe(viewLifecycleOwner) { currencyCode ->
+            binding.tvCurrency.text = currencyCode.code.uppercase()
         }
     }
 
     private fun observeMainViewModel() = with(mainViewModel) {
         coinPrice.observe(viewLifecycleOwner) { _coinPrice ->
             binding.apply {
-                viewModel.setCoinPrice(_coinPrice)
+                viewModel.updateCoinPrice(_coinPrice)
                 if (edtBtcAmount.hasFocus()) {
                     viewModel.setCoinAmount(edtBtcAmount.text.toString())
                 }
                 if (edtCurrencyAmount.hasFocus()) {
-                    viewModel.setCurrencyAmount(edtCurrencyAmount.text.toString(), "usd")
+                    viewModel.setCurrencyAmount(edtCurrencyAmount.text.toString())
                 }
             }
         }
@@ -88,8 +92,7 @@ class ConverterFragment : Fragment() {
         findNavController().currentBackStackEntry?.savedStateHandle?.apply {
             getLiveData<CurrencyCodeEnum>(KEY_SELECT_CURRENCY)
                 .observe(viewLifecycleOwner) { currencyCode ->
-                    Log.e("TAG", "observeNavControllerResult: ", )
-                    Log.e("TAG", "observeNavControllerResult currencyCode: $currencyCode", )
+                    viewModel.selectedCurrencyCode(currencyCode)
                 }
         }
     }
