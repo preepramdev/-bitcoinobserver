@@ -5,12 +5,7 @@ import com.pram.bitcoinobserver.data.repository.CoinPriceRepositoryImpl
 import com.pram.bitcoinobserver.data.source.local.MainDatabase
 import com.pram.bitcoinobserver.data.source.local.dao.CoinPriceDao
 import com.pram.bitcoinobserver.data.source.remote.CoinDeskApi
-import com.pram.bitcoinobserver.domain.usecase.GetCurrentCoinPriceUseCase
-import com.pram.bitcoinobserver.domain.usecase.GetCurrentCoinPriceUseCaseImpl
-import com.pram.bitcoinobserver.domain.usecase.GetHistoryCoinPricesUseCase
-import com.pram.bitcoinobserver.domain.usecase.GetHistoryCoinPricesUseCaseImpl
-import com.pram.bitcoinobserver.domain.usecase.SaveCoinPriceToHistoryUseCase
-import com.pram.bitcoinobserver.domain.usecase.SaveCoinPriceToHistoryUseCaseImpl
+import com.pram.bitcoinobserver.domain.usecase.*
 import com.pram.bitcoinobserver.presentation.feature.MainViewModel
 import com.pram.bitcoinobserver.presentation.feature.converter.ConverterViewModel
 import com.pram.bitcoinobserver.presentation.feature.history.HistoryViewModel
@@ -60,6 +55,14 @@ val mainModule = module {
         )
     }
 
+    factory<ConvertCoinToCurrencyUseCase> {
+        ConvertCoinToCurrencyUseCaseImpl()
+    }
+
+    factory<ConvertCurrencyToCoinUseCase> {
+        ConvertCurrencyToCoinUseCaseImpl()
+    }
+
     viewModel {
         MainViewModel(
             getCurrentCoinPriceUseCase = get(),
@@ -72,7 +75,10 @@ val mainModule = module {
     }
 
     viewModel {
-        ConverterViewModel()
+        ConverterViewModel(
+            convertCoinToCurrencyUseCase = get(),
+            convertCurrencyToCoinUseCase = get()
+        )
     }
 
     viewModel {

@@ -3,7 +3,6 @@ package com.pram.bitcoinobserver.app.di.global
 import android.content.Context
 import androidx.room.Room
 import com.pram.bitcoinobserver.data.source.local.MainDatabase
-import com.pram.bitcoinobserver.data.source.local.dao.CoinPriceDao
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 

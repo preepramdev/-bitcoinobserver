@@ -7,8 +7,13 @@ import androidx.lifecycle.ViewModel
 import com.pram.bitcoinobserver.domain.enumModel.CurrencyCodeEnum
 import com.pram.bitcoinobserver.domain.model.AmountModel
 import com.pram.bitcoinobserver.domain.model.CoinPriceModel
+import com.pram.bitcoinobserver.domain.usecase.ConvertCoinToCurrencyUseCase
+import com.pram.bitcoinobserver.domain.usecase.ConvertCurrencyToCoinUseCase
 
-class ConverterViewModel : ViewModel() {
+class ConverterViewModel(
+    private val convertCoinToCurrencyUseCase: ConvertCoinToCurrencyUseCase,
+    private val convertCurrencyToCoinUseCase: ConvertCurrencyToCoinUseCase
+) : ViewModel() {
 
     companion object {
         private const val DEFAULT_INPUT_AMOUNT = 0.0
@@ -64,13 +69,19 @@ class ConverterViewModel : ViewModel() {
     }
 
     private fun calculateCoinAmount() {
-        val calculateCoinResult = (amountModel.currencyInputAmount / coinPriceInSelectedCurrency)
+        val calculateCoinResult = convertCurrencyToCoinUseCase.execute(
+            amountModel.currencyInputAmount,
+            coinPriceInSelectedCurrency
+        )
         amountModel.coinInputAmount = calculateCoinResult
         _showCoinAmountResult.value = calculateCoinResult
     }
 
     private fun calculateCurrencyAmount() {
-        val calculateCurrencyResult = (amountModel.coinInputAmount * coinPriceInSelectedCurrency)
+        val calculateCurrencyResult = convertCoinToCurrencyUseCase.execute(
+            amountModel.coinInputAmount,
+            coinPriceInSelectedCurrency
+        )
         amountModel.currencyInputAmount = calculateCurrencyResult
         _showCurrencyAmountResult.value = calculateCurrencyResult
     }
