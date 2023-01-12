@@ -47,14 +47,14 @@ class MainViewModel(
             .flatMapConcat { coinPriceModel ->
                 saveCoinPriceToHistoryUseCase.execute(coinPriceModel).map { coinPriceModel }
             }.collect { coinPriceModel ->
-                showCoinPrice(coinPriceModel)
                 setIsLiveNeeded(true)
+                showCoinPrice(coinPriceModel)
             }
     }
 
     fun setCoinPriceFromHistory(coinPriceModel: CoinPriceModel) {
-        showCoinPrice(coinPriceModel)
         setIsLiveNeeded(false)
+        showCoinPrice(coinPriceModel)
     }
 
     private fun showCoinPrice(coinPriceModel: CoinPriceModel) {

@@ -10,6 +10,11 @@ import com.pram.bitcoinobserver.domain.model.CoinPriceModel
 
 class ConverterViewModel : ViewModel() {
 
+    companion object {
+        private const val DEFAULT_INPUT_AMOUNT = 0.0
+        private const val DEFAULT_COIN_PRICE_IN_SELECTED_CURRENCY = 0.0
+    }
+
     var amountModel = AmountModel()
 
     var coinPriceInSelectedCurrency: Double = 0.0
@@ -23,11 +28,9 @@ class ConverterViewModel : ViewModel() {
     fun setCoinPrice(coinPrice: CoinPriceModel) {
         kotlin.runCatching {
             val rate = coinPrice.bpi?.usd?.rate ?: "" // select with currencyCode
-            rate.replace(",", "").toDouble()
+            rate.replace(",", "").toDoubleOrNull() ?: DEFAULT_COIN_PRICE_IN_SELECTED_CURRENCY
         }.onSuccess { _coinPriceInSelectedCurrency ->
             coinPriceInSelectedCurrency = _coinPriceInSelectedCurrency
-//            calculateCoinAmount()
-//            calculateCurrencyAmount()
         }.onFailure { exception ->
             exception.printStackTrace()
         }
@@ -36,7 +39,7 @@ class ConverterViewModel : ViewModel() {
 
     fun setCoinAmount(coinInput: String) {
         runCatching {
-            coinInput.toDouble()
+            coinInput.toDoubleOrNull() ?: DEFAULT_INPUT_AMOUNT
         }.onSuccess { coinAmount ->
             amountModel.coinInputAmount = coinAmount
             calculateCurrencyAmount()
@@ -48,7 +51,7 @@ class ConverterViewModel : ViewModel() {
 
     fun setCurrencyAmount(currencyInput: String, currencyCode: String) {
         runCatching {
-            val currencyAmount = currencyInput.toDouble()
+            val currencyAmount = currencyInput.toDoubleOrNull() ?: DEFAULT_INPUT_AMOUNT
 //            val currencyCodeEnum = CurrencyCodeEnum.valueOf(currencyCode)
             Pair(currencyAmount, CurrencyCodeEnum.USD)
         }.onSuccess { pairCurrency ->
@@ -58,19 +61,16 @@ class ConverterViewModel : ViewModel() {
         }.onFailure { exception ->
             exception.printStackTrace()
         }
-        Log.e("TAG", "setCurrencyAmount: $amountModel")
     }
 
     private fun calculateCoinAmount() {
         val calculateCoinResult = (amountModel.currencyInputAmount / coinPriceInSelectedCurrency)
-        Log.e("TAG", "calculateCoinAmount: $calculateCoinResult")
         amountModel.coinInputAmount = calculateCoinResult
         _showCoinAmountResult.value = calculateCoinResult
     }
 
     private fun calculateCurrencyAmount() {
         val calculateCurrencyResult = (amountModel.coinInputAmount * coinPriceInSelectedCurrency)
-        Log.e("TAG", "calculateCurrencyAmount: $calculateCurrencyResult")
         amountModel.currencyInputAmount = calculateCurrencyResult
         _showCurrencyAmountResult.value = calculateCurrencyResult
     }

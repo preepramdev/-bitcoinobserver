@@ -8,6 +8,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import com.pram.bitcoinobserver.databinding.FragmentConverterBinding
 import com.pram.bitcoinobserver.presentation.feature.MainViewModel
+import com.pram.bitcoinobserver.presentation.feature.converter.extension.toStringIn10Decimal
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -49,10 +50,10 @@ class ConverterFragment : Fragment() {
 
     private fun observeViewModel() = with(viewModel) {
         showCoinAmountResult.observe(viewLifecycleOwner) { coinAmount ->
-            binding.edtBtcAmount.setText(String.format("%.10f", coinAmount))
+            binding.edtBtcAmount.setText(coinAmount.toStringIn10Decimal())
         }
         showCurrencyAmountResult.observe(viewLifecycleOwner) { currencyAmount ->
-            binding.edtCurrencyAmount.setText(String.format("%.10f", currencyAmount))
+            binding.edtCurrencyAmount.setText(currencyAmount.toStringIn10Decimal())
         }
     }
 
