@@ -30,7 +30,7 @@ class CurrencyItemAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun setup(currencyCodeEnum: CurrencyCodeEnum) = with(binding){
-            tvCurrency.text = currencyCodeEnum.code
+            tvCurrency.text = currencyCodeEnum.code.uppercase()
             root.setOnClickListener {
                 onItemClicked?.let { it(currencyCodeEnum) }
             }

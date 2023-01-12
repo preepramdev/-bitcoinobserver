@@ -1,4 +1,4 @@
-package com.pram.bitcoinobserver.domain.usecase
+package com.pram.bitcoinobserver.domain.usecase.converter
 
 interface ConvertCoinToCurrencyUseCase {
 

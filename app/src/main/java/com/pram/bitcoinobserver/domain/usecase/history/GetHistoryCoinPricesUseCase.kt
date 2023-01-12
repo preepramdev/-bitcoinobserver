@@ -1,8 +1,7 @@
-package com.pram.bitcoinobserver.domain.usecase
+package com.pram.bitcoinobserver.domain.usecase.history
 
 import com.google.gson.Gson
 import com.pram.bitcoinobserver.data.repository.CoinPriceRepository
-import com.pram.bitcoinobserver.data.source.local.entity.CoinPriceEntity
 import com.pram.bitcoinobserver.domain.model.CoinPriceModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

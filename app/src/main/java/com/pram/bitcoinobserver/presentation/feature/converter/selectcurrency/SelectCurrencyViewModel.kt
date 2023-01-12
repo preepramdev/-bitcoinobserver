@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pram.bitcoinobserver.domain.enumModel.CurrencyCodeEnum
-import com.pram.bitcoinobserver.domain.usecase.GetCurrencyCodesUseCase
+import com.pram.bitcoinobserver.domain.usecase.converter.GetCurrencyCodesUseCase
 
 class SelectCurrencyViewModel(
     private val getCurrencyCodesUseCase: GetCurrencyCodesUseCase

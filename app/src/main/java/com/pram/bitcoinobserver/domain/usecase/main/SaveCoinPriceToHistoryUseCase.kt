@@ -1,4 +1,4 @@
-package com.pram.bitcoinobserver.domain.usecase
+package com.pram.bitcoinobserver.domain.usecase.main
 
 import com.google.gson.Gson
 import com.pram.bitcoinobserver.data.repository.CoinPriceRepository

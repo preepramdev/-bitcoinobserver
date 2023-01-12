@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pram.bitcoinobserver.domain.model.CoinPriceModel
-import com.pram.bitcoinobserver.domain.usecase.GetCurrentCoinPriceUseCase
-import com.pram.bitcoinobserver.domain.usecase.SaveCoinPriceToHistoryUseCase
+import com.pram.bitcoinobserver.domain.usecase.main.GetCurrentCoinPriceUseCase
+import com.pram.bitcoinobserver.domain.usecase.main.SaveCoinPriceToHistoryUseCase
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.map

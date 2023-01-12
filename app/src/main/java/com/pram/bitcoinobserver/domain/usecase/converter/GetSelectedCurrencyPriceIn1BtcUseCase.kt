@@ -1,4 +1,4 @@
-package com.pram.bitcoinobserver.domain.usecase
+package com.pram.bitcoinobserver.domain.usecase.converter
 
 import com.pram.bitcoinobserver.domain.enumModel.CurrencyCodeEnum
 import com.pram.bitcoinobserver.domain.model.CoinPriceModel

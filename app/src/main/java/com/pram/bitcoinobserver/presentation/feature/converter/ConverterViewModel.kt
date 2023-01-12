@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.pram.bitcoinobserver.domain.enumModel.CurrencyCodeEnum
 import com.pram.bitcoinobserver.domain.model.CoinPriceModel
 import com.pram.bitcoinobserver.domain.model.ConvertAmountModel
-import com.pram.bitcoinobserver.domain.usecase.ConvertCoinToCurrencyUseCase
-import com.pram.bitcoinobserver.domain.usecase.ConvertCurrencyToCoinUseCase
-import com.pram.bitcoinobserver.domain.usecase.GetSelectedCurrencyPriceIn1BtcUseCase
+import com.pram.bitcoinobserver.domain.usecase.converter.ConvertCoinToCurrencyUseCase
+import com.pram.bitcoinobserver.domain.usecase.converter.ConvertCurrencyToCoinUseCase
+import com.pram.bitcoinobserver.domain.usecase.converter.GetSelectedCurrencyPriceIn1BtcUseCase
 
 class ConverterViewModel(
     private val convertCoinToCurrencyUseCase: ConvertCoinToCurrencyUseCase,

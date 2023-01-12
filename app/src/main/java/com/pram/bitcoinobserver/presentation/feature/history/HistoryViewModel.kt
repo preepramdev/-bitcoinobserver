@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pram.bitcoinobserver.domain.model.CoinPriceModel
-import com.pram.bitcoinobserver.domain.usecase.GetHistoryCoinPricesUseCase
+import com.pram.bitcoinobserver.domain.usecase.history.GetHistoryCoinPricesUseCase
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HistoryViewModel(

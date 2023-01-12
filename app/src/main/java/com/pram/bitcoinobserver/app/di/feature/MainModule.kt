@@ -5,7 +5,13 @@ import com.pram.bitcoinobserver.data.repository.CoinPriceRepositoryImpl
 import com.pram.bitcoinobserver.data.source.local.MainDatabase
 import com.pram.bitcoinobserver.data.source.local.dao.CoinPriceDao
 import com.pram.bitcoinobserver.data.source.remote.CoinDeskApi
-import com.pram.bitcoinobserver.domain.usecase.*
+import com.pram.bitcoinobserver.domain.usecase.converter.*
+import com.pram.bitcoinobserver.domain.usecase.history.GetHistoryCoinPricesUseCase
+import com.pram.bitcoinobserver.domain.usecase.history.GetHistoryCoinPricesUseCaseImpl
+import com.pram.bitcoinobserver.domain.usecase.main.GetCurrentCoinPriceUseCase
+import com.pram.bitcoinobserver.domain.usecase.main.GetCurrentCoinPriceUseCaseImpl
+import com.pram.bitcoinobserver.domain.usecase.main.SaveCoinPriceToHistoryUseCase
+import com.pram.bitcoinobserver.domain.usecase.main.SaveCoinPriceToHistoryUseCaseImpl
 import com.pram.bitcoinobserver.presentation.feature.MainViewModel
 import com.pram.bitcoinobserver.presentation.feature.converter.ConverterViewModel
 import com.pram.bitcoinobserver.presentation.feature.converter.selectcurrency.SelectCurrencyViewModel
