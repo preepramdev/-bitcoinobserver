@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.pram.bitcoinobserver.R
 import com.pram.bitcoinobserver.databinding.FragmentConverterBinding
 import com.pram.bitcoinobserver.domain.enumModel.CurrencyCodeEnum
+import com.pram.bitcoinobserver.domain.model.CoinPriceModel
+import com.pram.bitcoinobserver.presentation.feature.MainActivity
 import com.pram.bitcoinobserver.presentation.feature.MainViewModel
 import com.pram.bitcoinobserver.presentation.feature.converter.extension.toStringIn10Decimal
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
@@ -101,6 +103,11 @@ class ConverterFragment : Fragment() {
                             viewModel.setCurrencyAmount(edtCurrencyAmount.text.toString())
                         }
                     }
+                }
+
+            getLiveData<CoinPriceModel>(MainActivity.KET_SELECT_FROM_HISTORY)
+                .observe(viewLifecycleOwner) { selectedCoinPrice ->
+                    mainViewModel.setCoinPriceFromHistory(selectedCoinPrice)
                 }
         }
     }

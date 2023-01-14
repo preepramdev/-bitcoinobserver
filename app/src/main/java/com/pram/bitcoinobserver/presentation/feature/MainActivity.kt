@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.pram.bitcoinobserver.R
 import com.pram.bitcoinobserver.databinding.ActivityMainBinding
 import com.pram.bitcoinobserver.domain.model.CoinPriceModel
+import com.pram.bitcoinobserver.presentation.formatDate
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -17,8 +18,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity() {
 
     companion object {
-//                private const val DELAY_UPDATE_TIME = 1000L * 60
+        //                private const val DELAY_UPDATE_TIME = 1000L * 60
         private const val DELAY_UPDATE_TIME = 2000L
+        private const val FETCH_TIME_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        private const val UPDATE_TIME_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX"
+        private const val DISPLAY_DATE_FORMAT = "dd-MM-yyyy HH:mm:ss"
         const val KET_SELECT_FROM_HISTORY = "KET_SELECT_FROM_HISTORY"
     }
 
@@ -31,7 +35,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val navHomeFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHomeFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHomeFragment.findNavController()
         binding.bottomNav.setupWithNavController(navController)
 
@@ -67,11 +72,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         coinPrice.observe(this@MainActivity) { _coinPrice ->
-            binding.apply {
-                tvLastFetch.text = "fetch time ${_coinPrice.fetchTime}"
-                tvLastUpdate.text = "last update ${_coinPrice.time?.updated.orEmpty()}"
-                tvDisclaimer.text = _coinPrice.disclaimer.orEmpty()
-            }
+            setDisclaimerData(_coinPrice)
         }
     }
 
@@ -79,8 +80,24 @@ class MainActivity : AppCompatActivity() {
         navController.currentBackStackEntry?.savedStateHandle?.apply {
             getLiveData<CoinPriceModel>(KET_SELECT_FROM_HISTORY)
                 .observe(this@MainActivity) { selectedCoinPrice ->
-                viewModel.setCoinPriceFromHistory(selectedCoinPrice)
-            }
+                    viewModel.setCoinPriceFromHistory(selectedCoinPrice)
+                }
+        }
+    }
+
+    private fun setDisclaimerData(_coinPrice: CoinPriceModel) {
+        binding.apply {
+            val fetchTime = _coinPrice.fetchTime.formatDate(
+                FETCH_TIME_DATE_FORMAT,
+                DISPLAY_DATE_FORMAT
+            )
+            val updateTime = _coinPrice.time?.updatedISO?.formatDate(
+                UPDATE_TIME_DATE_FORMAT,
+                DISPLAY_DATE_FORMAT
+            )
+            tvFetchTime.text = fetchTime
+            tvUpdateTime.text = updateTime
+            tvDisclaimer.text = _coinPrice.disclaimer.orEmpty()
         }
     }
 }

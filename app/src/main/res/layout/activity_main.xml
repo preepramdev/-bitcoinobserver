@@ -19,7 +19,7 @@
             android:id="@+id/sw_live"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Live"
+            android:text="@string/text_live"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +28,7 @@
             android:id="@+id/btn_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="History"
+            android:text="@string/text_history"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +36,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_disclaimer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,25 +48,64 @@
         app:layout_constraintTop_toBottomOf="@id/layout_top_control">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_last_fetch"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_fetch_time_title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="last fetch " />
+            android:text="@string/text_fetch_time"
+            android:textColor="@color/teal_200"
+            app:layout_constraintEnd_toEndOf="@id/tv_update_time_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_last_update"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="last update" />
-
-        <TextView
-            android:id="@+id/tv_disclaimer"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_fetch_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="disclaimer"
-            android:textColor="@color/teal_200" />
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@+id/tv_fetch_time_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_fetch_time_title"
+            tools:text="last fetch " />
 
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_update_time_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Time"
+            android:textColor="@color/teal_200"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_fetch_time_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_update_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@+id/tv_update_time_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_update_time_title"
+            tools:text="last fetch " />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_disclaimer_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Disclaimer"
+            android:textColor="@color/teal_200"
+            app:layout_constraintEnd_toEndOf="@id/tv_update_time_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_update_time_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_disclaimer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_disclaimer_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_disclaimer_title"
+            tools:text="disclaimer " />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"

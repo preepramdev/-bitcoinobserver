@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/tvCurrencyCode"
             app:layout_constraintTop_toBottomOf="@id/tvCurrencyCode"
-            tools:text="symbol" />
+            tools:text="description" />
 
         <TextView
             android:id="@+id/tvRate"
@@ -41,7 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvDescription"
-            tools:text="rate" />
+            tools:text="rate 0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

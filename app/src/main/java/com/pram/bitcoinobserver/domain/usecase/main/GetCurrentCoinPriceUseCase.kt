@@ -7,6 +7,8 @@ import com.pram.bitcoinobserver.domain.model.CoinPriceModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 
 interface GetCurrentCoinPriceUseCase {
 
@@ -24,7 +26,7 @@ class GetCurrentCoinPriceUseCaseImpl(
             }
     }
 
-    @SuppressLint("NewApi") // todo
+    @SuppressLint("NewApi")
     private fun mapCurrentPriceResponseToCoinPriceModel(
         currentPriceResponse: CurrentPriceResponse
     ): CoinPriceModel {
@@ -33,7 +35,7 @@ class GetCurrentCoinPriceUseCaseImpl(
         val bpi = currentPriceResponse.bpi
 
         return CoinPriceModel(
-            fetchTime = LocalDateTime.now().toString(),
+            fetchTime = LocalDateTime.now(ZoneOffset.UTC).toString(),
             time = CoinPriceModel.Time(
                 updated = time?.updated,
                 updatedISO = time?.updatedISO,
