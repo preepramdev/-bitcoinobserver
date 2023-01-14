@@ -1,11 +1,9 @@
 package com.pram.bitcoinobserver.data.repository
 
-import android.util.Log
 import com.pram.bitcoinobserver.data.source.local.dao.CoinPriceDao
 import com.pram.bitcoinobserver.data.source.local.entity.CoinPriceEntity
 import com.pram.bitcoinobserver.data.source.remote.CoinDeskApi
 import com.pram.bitcoinobserver.data.source.remote.response.CurrentPriceResponse
-import com.pram.bitcoinobserver.domain.model.CoinPriceModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -42,6 +40,7 @@ class CoinPriceRepositoryImpl (
             emit(coinPriceEntityList)
         }.onFailure { exception ->
             exception.printStackTrace()
+            throw exception
         }
     }.flowOn(Dispatchers.IO)
 
@@ -52,7 +51,7 @@ class CoinPriceRepositoryImpl (
             emit(Unit)
         }.onFailure { exception ->
             exception.printStackTrace()
-            emit(Unit)
+            throw exception
         }
     }.flowOn(Dispatchers.IO)
 
