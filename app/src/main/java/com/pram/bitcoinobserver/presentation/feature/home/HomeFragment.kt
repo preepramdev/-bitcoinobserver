@@ -46,11 +46,17 @@ class HomeFragment : Fragment() {
 
     private fun showCoinPrice(currenciesBpi: CoinPriceModel.Bpi) = with(binding) {
         val usd = currenciesBpi.usd
-        val gbp =currenciesBpi.gbp
+        val gbp = currenciesBpi.gbp
         val eur = currenciesBpi.eur
 
-        usd?.let { currencyWidgetUsd.setCurrency(it) }
-        gbp?.let { currencyWidgetGbp.setCurrency(it) }
-        eur?.let { currencyWidgetEur.setCurrency(it) }
+        usd?.let { _usd ->
+            currencyWidgetUsd.setCurrency(_usd)
+        }
+        gbp?.let { _gbp ->
+            currencyWidgetGbp.setCurrency(_gbp)
+        }
+        eur?.let { _eur ->
+            currencyWidgetEur.setCurrency(_eur)
+        }
     }
 }

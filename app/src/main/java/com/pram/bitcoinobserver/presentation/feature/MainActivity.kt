@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.pram.bitcoinobserver.R
 import com.pram.bitcoinobserver.databinding.ActivityMainBinding
 import com.pram.bitcoinobserver.domain.model.CoinPriceModel
-import com.pram.bitcoinobserver.presentation.formatDate
+import com.pram.bitcoinobserver.presentation.extension.formatDate
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,8 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        //                private const val DELAY_UPDATE_TIME = 1000L * 60
-        private const val DELAY_UPDATE_TIME = 2000L
+        private const val DELAY_UPDATE_TIME = 1000L * 60
         private const val FETCH_TIME_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS"
         private const val UPDATE_TIME_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX"
         private const val DISPLAY_DATE_FORMAT = "dd-MM-yyyy HH:mm:ss"

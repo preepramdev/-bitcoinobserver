@@ -5,11 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pram.bitcoinobserver.databinding.ItemCoinPriceHistoryBinding
 import com.pram.bitcoinobserver.domain.model.CoinPriceModel
-import com.pram.bitcoinobserver.presentation.formatDate
+import com.pram.bitcoinobserver.presentation.extension.formatDate
 
 class CoinPriceHistoryItemAdapter(
     private val historyList: MutableList<CoinPriceModel> = mutableListOf()
 ) : RecyclerView.Adapter<CoinPriceHistoryItemAdapter.CoinPriceHistoryItemViewHolder>() {
+
+    companion object {
+        private const val UPDATE_TIME_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX"
+        private const val DISPLAY_DATE_FORMAT = "dd-MM-yyyy HH:mm:ss"
+    }
 
     var onItemClicked: ((CoinPriceModel) -> Unit?)? = null
 
@@ -42,9 +47,9 @@ class CoinPriceHistoryItemAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun setup(coinPrice: CoinPriceModel) = with(binding) {
-            tvFetchTime.text = coinPrice.fetchTime.formatDate("yyyy-MM-dd'T'HH:mm:ss.SSS", "dd-MM-yyyy HH:mm:ss")
+            tvFetchTime.text = coinPrice.fetchTime.formatDate(UPDATE_TIME_DATE_FORMAT, DISPLAY_DATE_FORMAT)
             root.setOnClickListener {
-                onItemClicked?.let { it(coinPrice) }
+                onItemClicked?.invoke(coinPrice)
             }
         }
     }

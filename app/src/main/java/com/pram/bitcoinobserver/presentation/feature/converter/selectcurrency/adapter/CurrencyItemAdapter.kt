@@ -12,6 +12,14 @@ class CurrencyItemAdapter(
 
     var onItemClicked: ((CurrencyCodeEnum) -> Unit?)? = null
 
+    fun setupCurrencyList(currencyCodeList: List<CurrencyCodeEnum>) {
+        this.currencyCodeList.apply {
+            clear()
+            addAll(currencyCodeList)
+            notifyDataSetChanged()
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemCurrencyBinding.inflate(layoutInflater, parent, false)
@@ -29,10 +37,10 @@ class CurrencyItemAdapter(
         private val binding: ItemCurrencyBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setup(currencyCodeEnum: CurrencyCodeEnum) = with(binding){
+        fun setup(currencyCodeEnum: CurrencyCodeEnum) = with(binding) {
             tvCurrency.text = currencyCodeEnum.code.uppercase()
             root.setOnClickListener {
-                onItemClicked?.let { it(currencyCodeEnum) }
+                onItemClicked?.invoke(currencyCodeEnum)
             }
         }
     }

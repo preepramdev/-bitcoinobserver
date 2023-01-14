@@ -20,6 +20,7 @@ class HistoryViewModel(
         getHistoryCoinPricesUseCase.execute()
             .catch { exception ->
                 exception.printStackTrace()
+                _showHistories.value = listOf()
             }.collect{ histories ->
                 _showHistories.value = histories
             }

@@ -8,7 +8,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pram.bitcoinobserver.databinding.DialogSelectCurrencyBinding
-import com.pram.bitcoinobserver.domain.enumModel.CurrencyCodeEnum
 import com.pram.bitcoinobserver.presentation.feature.converter.ConverterFragment
 import com.pram.bitcoinobserver.presentation.feature.converter.selectcurrency.adapter.CurrencyItemAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,9 +17,7 @@ class SelectCurrencyDialogFragment : DialogFragment() {
     private val binding by lazy { DialogSelectCurrencyBinding.inflate(layoutInflater) }
     private val viewModel by viewModel<SelectCurrencyViewModel>()
 
-    private val currencyItemAdapter = CurrencyItemAdapter(
-        currencyCodeList = CurrencyCodeEnum.values().toMutableList()
-    )
+    private val currencyItemAdapter = CurrencyItemAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +32,7 @@ class SelectCurrencyDialogFragment : DialogFragment() {
 
         initView()
         observeViewModel()
+        viewModel.getCurrencyCodes()
     }
 
     private fun initView() = with(binding) {
@@ -57,7 +55,7 @@ class SelectCurrencyDialogFragment : DialogFragment() {
 
     private fun observeViewModel() = with(viewModel) {
         showCurrencyCode.observe(viewLifecycleOwner) { currencyCodes ->
-
+            currencyItemAdapter.setupCurrencyList(currencyCodes)
         }
     }
 }

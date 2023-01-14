@@ -35,7 +35,7 @@ class GetCurrentCoinPriceUseCaseImpl(
         val bpi = currentPriceResponse.bpi
 
         return CoinPriceModel(
-            fetchTime = LocalDateTime.now(ZoneOffset.UTC).toString(),
+            fetchTime = LocalDateTime.now().toString(),
             time = CoinPriceModel.Time(
                 updated = time?.updated,
                 updatedISO = time?.updatedISO,

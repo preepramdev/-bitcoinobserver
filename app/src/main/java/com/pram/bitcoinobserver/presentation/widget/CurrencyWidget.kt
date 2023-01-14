@@ -1,6 +1,5 @@
 package com.pram.bitcoinobserver.presentation.widget
 
-import android.content.ClipDescription
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -21,8 +20,16 @@ class CurrencyWidget@JvmOverloads constructor(
     )
 
     fun setCurrency(currency: CoinPriceModel.Bpi.Currency) = with(binding) {
+        val description = HtmlCompat.fromHtml(
+            "${currency.symbol.orEmpty()} ${currency.description.orEmpty()}",
+            HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
+        val rate = HtmlCompat.fromHtml(
+            "1 BTC = ${currency.rate} ${currency.symbol}",
+            HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
         tvCurrencyCode.text = currency.code.orEmpty()
-        tvDescription.text = HtmlCompat.fromHtml( "${currency.symbol.orEmpty()} ${currency.description.orEmpty()}", 0)
-        tvRate.text = HtmlCompat.fromHtml("1 BTC = ${currency.rate} ${currency.symbol}", 0)
+        tvDescription.text = description
+        tvRate.text = rate
     }
 }
